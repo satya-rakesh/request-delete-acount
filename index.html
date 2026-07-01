@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete Account Request</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    width:420px;
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:15px;
+}
+
+p{
+    color:#555;
+    line-height:1.5;
+}
+
+.warning{
+    background:#fff3cd;
+    color:#856404;
+    padding:12px;
+    border-radius:8px;
+    margin:15px 0;
+    border:1px solid #ffeeba;
+}
+
+input,textarea{
+    width:100%;
+    padding:12px;
+    margin-top:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+textarea{
+    resize:none;
+    height:90px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:8px;
+    margin-top:15px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.primary{
+    background:#2563eb;
+    color:#fff;
+}
+
+.primary:hover{
+    background:#1d4ed8;
+}
+
+.danger{
+    background:#dc2626;
+    color:#fff;
+}
+
+.danger:hover{
+    background:#b91c1c;
+}
+
+.cancel{
+    background:#999;
+    color:#fff;
+}
+
+.success{
+    display:none;
+    text-align:center;
+}
+
+.success h2{
+    color:#16a34a;
+}
+
+.hidden{
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Confirmation Screen -->
+    <div id="confirmScreen">
+
+        <h2>Delete Account</h2>
+
+        <div class="warning">
+            <strong>Warning!</strong><br><br>
+            Deleting your account is permanent and cannot be undone.
+            Please confirm that you wish to continue.
+        </div>
+
+        <button class="primary" onclick="showForm()">
+            Yes, Continue
+        </button>
+
+        <button class="cancel" onclick="cancelRequest()">
+            Cancel
+        </button>
+
+    </div>
+
+    <!-- Request Form -->
+    <div id="formScreen" class="hidden">
+
+        <h2>Delete Account Request</h2>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Full Name"
+            required>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Registered Email"
+            required>
+
+        <input
+            type="text"
+            id="account"
+            placeholder="Account ID"
+            required>
+
+        <textarea
+            id="reason"
+            placeholder="Reason for deleting your account (optional)">
+        </textarea>
+
+        <button class="danger" onclick="deleteAccount()">
+            Submit Delete Request
+        </button>
+
+    </div>
+
+    <!-- Success Screen -->
+    <div id="successScreen" class="success">
+
+        <h2>Request Submitted</h2>
+
+        <br>
+
+        <p>
+            Your account deletion request has been submitted successfully.
+        </p>
+
+        <br>
+
+        <p>
+            Our support team will review your request and process the account deletion after verification.
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+function showForm(){
+    document.getElementById("confirmScreen").classList.add("hidden");
+    document.getElementById("formScreen").classList.remove("hidden");
+}
+
+function cancelRequest(){
+    alert("Account deletion request cancelled.");
+}
+
+function deleteAccount(){
+
+    const name=document.getElementById("name").value.trim();
+    const email=document.getElementById("email").value.trim();
+    const account=document.getElementById("account").value.trim();
+
+    if(name==="" || email==="" || account===""){
+        alert("Please fill all required fields.");
+        return;
+    }
+
+    document.getElementById("formScreen").classList.add("hidden");
+    document.getElementById("successScreen").style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>
